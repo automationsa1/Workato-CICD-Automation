@@ -54,8 +54,7 @@
   test: lambda do |connection|
     connection["workato_environments"].each do |env|
       get("/api/users/me")
-      .headers({ "x-user-email": "#{env["email"]}",
-                 "x-user-token": "#{env["api_key"]}" })      
+      .headers(call("get_auth_headers", connection, "DEV"))      
     end
   end,
   
@@ -387,7 +386,7 @@
             # Existing package download should always happen from DEV, hence ensure src_env_headers irrespective of API mode
             src_env_headers = call("get_auth_headers", connection, "DEV")
             deploy_body = get("/api/packages/#{input["id"]}/download")
-              .headers(src_env_headers).headers("Accept": "*/*")
+              .headers(headers).headers("Accept": "*/*")
               .after_error_response(/.*/) do |_code, body, _header, message|
                 error("#{message}: #{body}")
               end.response_format_raw.encode('ASCII-8BIT')
@@ -406,6 +405,9 @@
           res_success = projects ? (response["state"] == "success") : (response["status"] == "completed")          
           
           # If job is in_progress, reinvoke after wait time
+          current_step = current_step + 1
+          max_steps = 10
+          step_time = current_step * 10 # This helps us wait longer and longer as we increase in steps
           if res_in_progress
               reinvoke_after(
                 seconds: step_time, 

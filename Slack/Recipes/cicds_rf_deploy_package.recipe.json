@@ -1,7 +1,7 @@
 {
   "name": "CICDS | RF | Deploy package",
   "description": "When there is a function call, do action",
-  "version": 3,
+  "version": 13,
   "private": true,
   "concurrency": 1,
   "code": {
@@ -179,14 +179,15 @@
                     "description": "Deploy <span class=\"provider\">package</span> to Workato <span class=\"provider\"></span>",
                     "keyword": "action",
                     "dynamicPickListSelection": {
-                      "api_mode": "Recipe Lifecycle Management",
-                      "env_type": "Test"
+                      "api_mode": "Projects",
+                      "env_type": "Test",
+                      "workato_environment": "DEV"
                     },
                     "toggleCfg": {
                     },
                     "input": {
-                      "api_mode": "rlcm",
-                      "id": "#{_('data.workato_recipe_function.b8143a76.parameters.package_id')}",
+                      "api_mode": "projects",
+                      "id": "23104",
                       "env_type": "test",
                       "description": "release_version: #{_('data.workato_recipe_function.b8143a76.parameters.release_version')}\ncicd_action:  Deploy release\nrelease_log: #{_('data.workato_recipe_function.b8143a76.parameters.ideployment_comments')}\nrelease_refs: #{_('data.workato_recipe_function.b8143a76.parameters.release_refs')}\nreleased_by: #{_('data.workato_recipe_function.b8143a76.parameters.requester')}"
                     },
@@ -212,6 +213,7 @@
                         "hint": "Select environment.",
                         "label": "Workato environment",
                         "name": "workato_environment",
+                        "ngIf": "input.api_mode == 'rlcm'",
                         "optional": true,
                         "pick_list": "environments",
                         "toggle_field": {
@@ -230,6 +232,7 @@
                         "hint": "Target environment folder ID to import package into.",
                         "label": "Folder ID",
                         "name": "folder_id",
+                        "ngIf": "input.api_mode == 'rlcm'",
                         "optional": true,
                         "type": "string"
                       },
@@ -238,6 +241,7 @@
                         "hint": "Target environment type. Projects API currently supports only test and prod values.",
                         "label": "Environment type",
                         "name": "env_type",
+                        "ngIf": "input.api_mode == 'projects'",
                         "optional": true,
                         "pick_list": "target_environment_types",
                         "type": "string"
@@ -247,9 +251,16 @@
                         "hint": "Deployment description for documentation.",
                         "label": "Description",
                         "name": "description",
+                        "ngIf": "input.api_mode == 'projects'",
                         "optional": true,
                         "type": "string"
                       }
+                    ],
+                    "visible_config_fields": [
+                      "api_mode",
+                      "id",
+                      "env_type",
+                      "description"
                     ],
                     "comment": "Download and deploy build to TEST environment.",
                     "uuid": "d9b1d005-a14b-4d9f-acc4-1705a2db79e5"
@@ -308,6 +319,7 @@
                             "hint": "Select environment.",
                             "label": "Workato environment",
                             "name": "workato_environment",
+                            "ngIf": "input.api_mode == 'rlcm'",
                             "optional": true,
                             "pick_list": "environments",
                             "toggle_field": {
@@ -326,6 +338,7 @@
                             "hint": "Target environment folder ID to import package into.",
                             "label": "Folder ID",
                             "name": "folder_id",
+                            "ngIf": "input.api_mode == 'rlcm'",
                             "optional": true,
                             "type": "string"
                           },
@@ -334,6 +347,7 @@
                             "hint": "Target environment type. Projects API currently supports only test and prod values.",
                             "label": "Environment type",
                             "name": "env_type",
+                            "ngIf": "input.api_mode == 'projects'",
                             "optional": true,
                             "pick_list": "target_environment_types",
                             "type": "string"
@@ -343,6 +357,7 @@
                             "hint": "Deployment description for documentation.",
                             "label": "Description",
                             "name": "description",
+                            "ngIf": "input.api_mode == 'projects'",
                             "optional": true,
                             "type": "string"
                           }
@@ -443,6 +458,7 @@
                         "hint": "Select environment.",
                         "label": "Workato environment",
                         "name": "workato_environment",
+                        "ngIf": "input.api_mode == 'rlcm'",
                         "optional": true,
                         "pick_list": "environments",
                         "toggle_field": {
@@ -461,6 +477,7 @@
                         "hint": "Target environment folder ID to import package into.",
                         "label": "Folder ID",
                         "name": "folder_id",
+                        "ngIf": "input.api_mode == 'rlcm'",
                         "optional": true,
                         "type": "string"
                       },
@@ -469,6 +486,7 @@
                         "hint": "Target environment type. Projects API currently supports only test and prod values.",
                         "label": "Environment type",
                         "name": "env_type",
+                        "ngIf": "input.api_mode == 'projects'",
                         "optional": true,
                         "pick_list": "target_environment_types",
                         "type": "string"
@@ -478,6 +496,7 @@
                         "hint": "Deployment description for documentation.",
                         "label": "Description",
                         "name": "description",
+                        "ngIf": "input.api_mode == 'projects'",
                         "optional": true,
                         "type": "string"
                       }
@@ -539,6 +558,7 @@
                             "hint": "Select environment.",
                             "label": "Workato environment",
                             "name": "workato_environment",
+                            "ngIf": "input.api_mode == 'rlcm'",
                             "optional": true,
                             "pick_list": "environments",
                             "toggle_field": {
@@ -557,6 +577,7 @@
                             "hint": "Target environment folder ID to import package into.",
                             "label": "Folder ID",
                             "name": "folder_id",
+                            "ngIf": "input.api_mode == 'rlcm'",
                             "optional": true,
                             "type": "string"
                           },
@@ -565,6 +586,7 @@
                             "hint": "Target environment type. Projects API currently supports only test and prod values.",
                             "label": "Environment type",
                             "name": "env_type",
+                            "ngIf": "input.api_mode == 'projects'",
                             "optional": true,
                             "pick_list": "target_environment_types",
                             "type": "string"
@@ -574,6 +596,7 @@
                             "hint": "Deployment description for documentation.",
                             "label": "Description",
                             "name": "description",
+                            "ngIf": "input.api_mode == 'projects'",
                             "optional": true,
                             "type": "string"
                           }
