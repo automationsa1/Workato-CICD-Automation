@@ -1,7 +1,7 @@
 {
   "name": "CICDS | RF | Deploy package",
   "description": "When there is a function call, do action",
-  "version": 13,
+  "version": 14,
   "private": true,
   "concurrency": 1,
   "code": {
@@ -172,6 +172,51 @@
                 "block": [
                   {
                     "number": 4,
+                    "provider": "workato_recipe_function",
+                    "name": "call_recipe",
+                    "as": "67b8ea9f",
+                    "title": null,
+                    "description": "Call <span class=\"provider\">Build Project and Get Status of Build</span>",
+                    "keyword": "action",
+                    "dynamicPickListSelection": {
+                      "flow_id": "Build Project and Get Status of Build"
+                    },
+                    "toggleCfg": {
+                    },
+                    "input": {
+                      "flow_id": {
+                        "zip_name": "Slack/Recipes/build_project_and_get_status_of_build.recipe.json",
+                        "name": "Build Project and Get Status of Build",
+                        "folder": "Slack/Recipes"
+                      }
+                    },
+                    "extended_output_schema": [
+                      {
+                        "label": "Result",
+                        "name": "result",
+                        "properties": [
+                          {
+                            "control_type": "text",
+                            "label": "State",
+                            "name": "state",
+                            "type": "string",
+                            "optional": false
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "ID",
+                            "name": "id",
+                            "type": "string",
+                            "optional": false
+                          }
+                        ],
+                        "type": "object"
+                      }
+                    ],
+                    "uuid": "67320208-9635-4453-996c-336db804a813"
+                  },
+                  {
+                    "number": 5,
                     "provider": "cicd_for_workato_connector_1096414_1685367514",
                     "name": "deploy_package",
                     "as": "ae120496",
@@ -187,7 +232,7 @@
                     },
                     "input": {
                       "api_mode": "projects",
-                      "id": "23104",
+                      "id": "#{_('data.workato_recipe_function.67b8ea9f.result.id')}",
                       "env_type": "test",
                       "description": "release_version: #{_('data.workato_recipe_function.b8143a76.parameters.release_version')}\ncicd_action:  Deploy release\nrelease_log: #{_('data.workato_recipe_function.b8143a76.parameters.ideployment_comments')}\nrelease_refs: #{_('data.workato_recipe_function.b8143a76.parameters.release_refs')}\nreleased_by: #{_('data.workato_recipe_function.b8143a76.parameters.requester')}"
                     },
@@ -266,7 +311,7 @@
                     "uuid": "d9b1d005-a14b-4d9f-acc4-1705a2db79e5"
                   },
                   {
-                    "number": 5,
+                    "number": 6,
                     "keyword": "else",
                     "dynamicPickListSelection": {
                     },
@@ -276,7 +321,52 @@
                     },
                     "block": [
                       {
-                        "number": 6,
+                        "number": 7,
+                        "provider": "workato_recipe_function",
+                        "name": "call_recipe",
+                        "as": "b67c81ad",
+                        "title": null,
+                        "description": "Call <span class=\"provider\">Build Project and Get Status of Build</span>",
+                        "keyword": "action",
+                        "dynamicPickListSelection": {
+                          "flow_id": "Build Project and Get Status of Build"
+                        },
+                        "toggleCfg": {
+                        },
+                        "input": {
+                          "flow_id": {
+                            "zip_name": "Slack/Recipes/build_project_and_get_status_of_build.recipe.json",
+                            "name": "Build Project and Get Status of Build",
+                            "folder": "Slack/Recipes"
+                          }
+                        },
+                        "extended_output_schema": [
+                          {
+                            "label": "Result",
+                            "name": "result",
+                            "properties": [
+                              {
+                                "control_type": "text",
+                                "label": "State",
+                                "name": "state",
+                                "type": "string",
+                                "optional": false
+                              },
+                              {
+                                "control_type": "text",
+                                "label": "ID",
+                                "name": "id",
+                                "type": "string",
+                                "optional": false
+                              }
+                            ],
+                            "type": "object"
+                          }
+                        ],
+                        "uuid": "891e56e4-3d18-473b-8658-a042c86baa8c"
+                      },
+                      {
+                        "number": 8,
                         "provider": "cicd_for_workato_connector_1096414_1685367514",
                         "name": "deploy_package",
                         "as": "ab53447a",
@@ -377,7 +467,7 @@
             "uuid": "c8deb653-2f60-4f75-a47b-549d1fa538ef"
           },
           {
-            "number": 7,
+            "number": 9,
             "keyword": "if",
             "dynamicPickListSelection": {
             },
@@ -397,7 +487,7 @@
             },
             "block": [
               {
-                "number": 8,
+                "number": 10,
                 "keyword": "if",
                 "dynamicPickListSelection": {
                 },
@@ -417,7 +507,7 @@
                 },
                 "block": [
                   {
-                    "number": 9,
+                    "number": 11,
                     "provider": "cicd_for_workato_connector_1096414_1685367514",
                     "name": "deploy_package",
                     "as": "6262abe5",
@@ -505,7 +595,7 @@
                     "uuid": "c05dffd1-bfd3-4192-bd69-0ff7b51edd7a"
                   },
                   {
-                    "number": 10,
+                    "number": 12,
                     "keyword": "else",
                     "dynamicPickListSelection": {
                     },
@@ -515,7 +605,7 @@
                     },
                     "block": [
                       {
-                        "number": 11,
+                        "number": 13,
                         "provider": "cicd_for_workato_connector_1096414_1685367514",
                         "name": "deploy_package",
                         "as": "d1adca9c",
@@ -616,7 +706,7 @@
             "uuid": "0cd9062b-583f-4cae-9e49-8912d682e827"
           },
           {
-            "number": 12,
+            "number": 14,
             "provider": "slack_bot",
             "name": "post_bot_message",
             "as": "72add144",
@@ -784,7 +874,7 @@
             "uuid": "126742d7-4afa-4c23-b4fc-0599018640cf"
           },
           {
-            "number": 13,
+            "number": 15,
             "provider": "lookup_table",
             "name": "add_entry",
             "as": "bad25a8c",
@@ -994,7 +1084,7 @@
             "uuid": "a4e66a15-8481-402a-ad62-a77db189a724"
           },
           {
-            "number": 14,
+            "number": 16,
             "as": "af234a6c",
             "keyword": "catch",
             "dynamicPickListSelection": {
@@ -1007,7 +1097,7 @@
             },
             "block": [
               {
-                "number": 15,
+                "number": 17,
                 "provider": "slack_bot",
                 "name": "post_bot_message",
                 "as": "5d8e5bc6",
@@ -1033,7 +1123,7 @@
                 "uuid": "a5d821cf-138a-48c3-b92e-c7d9d597028c"
               },
               {
-                "number": 16,
+                "number": 18,
                 "provider": "lookup_table",
                 "name": "add_entry",
                 "as": "196ab090",
