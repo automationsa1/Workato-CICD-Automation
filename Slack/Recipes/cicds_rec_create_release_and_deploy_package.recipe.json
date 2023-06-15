@@ -1,7 +1,7 @@
 {
   "name": "CICDS | REC | Create release and deploy package",
   "description": "Webhook recipe to listen on pull request merge events from GitHub repository to trigger release creation and continuous delivery process.",
-  "version": 4,
+  "version": 5,
   "private": true,
   "concurrency": 1,
   "code": {
@@ -3832,6 +3832,51 @@
                 "block": [
                   {
                     "number": 6,
+                    "provider": "workato_recipe_function",
+                    "name": "call_recipe",
+                    "as": "fe20fce4",
+                    "title": null,
+                    "description": "Call <span class=\"provider\">CICDS | RF | Build Project and Get Status of Build</span>",
+                    "keyword": "action",
+                    "dynamicPickListSelection": {
+                      "flow_id": "CICDS | RF | Build Project and Get Status of Build"
+                    },
+                    "toggleCfg": {
+                    },
+                    "input": {
+                      "flow_id": {
+                        "zip_name": "Slack/Recipes/cicds_rf_build_project_and_get_status_of_build.recipe.json",
+                        "name": "CICDS | RF | Build Project and Get Status of Build",
+                        "folder": "Slack/Recipes"
+                      }
+                    },
+                    "extended_output_schema": [
+                      {
+                        "label": "Result",
+                        "name": "result",
+                        "properties": [
+                          {
+                            "control_type": "text",
+                            "label": "State",
+                            "name": "state",
+                            "type": "string",
+                            "optional": false
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "ID",
+                            "name": "id",
+                            "type": "string",
+                            "optional": false
+                          }
+                        ],
+                        "type": "object"
+                      }
+                    ],
+                    "uuid": "e0c694a3-5d53-4ad6-b195-81d286180ddc"
+                  },
+                  {
+                    "number": 7,
                     "provider": "cicd_for_workato_connector_1096414_1685367514",
                     "name": "deploy_package",
                     "as": "b2d9b7d1",
@@ -3846,7 +3891,7 @@
                     },
                     "input": {
                       "api_mode": "projects",
-                      "id": "#{_('data.cicd_for_git_hub_connector_1096414_1685367513.474ac7e5.release_package')}",
+                      "id": "#{_('data.workato_recipe_function.fe20fce4.result.id')}",
                       "env_type": "test",
                       "description": "release_version: #{_('data.cicd_for_git_hub_connector_1096414_1685367513.474ac7e5.release_version')}\ncicd_action:  Deploy new release to TEST (CD)\nrelease_log: #{_('data.cicd_for_git_hub_connector_1096414_1685367513.474ac7e5.release_log')}\nrelease_refs: #{_('data.cicd_for_git_hub_connector_1096414_1685367513.474ac7e5.release_refs')}\napprover: #{_('data.workato_webhooks.a9ef4c1d.payload.pull_request.merged_by.login')}"
                     },
@@ -3919,7 +3964,7 @@
                     "uuid": "e58e903a-ec94-41a1-aee1-4859fd7cd673"
                   },
                   {
-                    "number": 7,
+                    "number": 8,
                     "keyword": "else",
                     "dynamicPickListSelection": {
                     },
@@ -3929,7 +3974,7 @@
                     },
                     "block": [
                       {
-                        "number": 8,
+                        "number": 9,
                         "provider": "cicd_for_workato_connector_1096414_1685367514",
                         "name": "deploy_package",
                         "as": "0aa3467c",
@@ -4027,7 +4072,7 @@
                 "uuid": "e0281d34-f8c5-4804-8ee8-e103a8b6efff"
               },
               {
-                "number": 9,
+                "number": 10,
                 "provider": "slack_bot",
                 "name": "post_bot_message",
                 "as": "810f33e9",
@@ -4199,7 +4244,7 @@
                 "uuid": "0d2f6bc5-28a8-4e3c-935d-5ee10cffec68"
               },
               {
-                "number": 10,
+                "number": 11,
                 "provider": "lookup_table",
                 "name": "add_entry",
                 "as": "d7c30ceb",
@@ -4409,7 +4454,7 @@
                 "uuid": "2b0c7402-ffd4-4db8-ad2c-ab1804a3ca9c"
               },
               {
-                "number": 11,
+                "number": 12,
                 "keyword": "else",
                 "dynamicPickListSelection": {
                 },
@@ -4419,7 +4464,7 @@
                 },
                 "block": [
                   {
-                    "number": 12,
+                    "number": 13,
                     "provider": "slack_bot",
                     "name": "post_bot_message",
                     "as": "ff91b59a",
@@ -4591,7 +4636,7 @@
                     "uuid": "b7d8f4ca-78ff-4b62-a95d-5d711f6dc17c"
                   },
                   {
-                    "number": 13,
+                    "number": 14,
                     "provider": "lookup_table",
                     "name": "add_entry",
                     "as": "2c888cde",
@@ -4808,7 +4853,7 @@
             "uuid": "561ca346-7ef0-4f06-812d-d12652ee5f75"
           },
           {
-            "number": 14,
+            "number": 15,
             "as": "b17b93ab",
             "keyword": "catch",
             "dynamicPickListSelection": {
@@ -4821,7 +4866,7 @@
             },
             "block": [
               {
-                "number": 15,
+                "number": 16,
                 "provider": "slack_bot",
                 "name": "post_bot_message",
                 "as": "40e32bca",
@@ -4848,7 +4893,7 @@
                 "uuid": "f6f4f92b-6eda-4957-97d0-df8ce866530c"
               },
               {
-                "number": 16,
+                "number": 17,
                 "provider": "lookup_table",
                 "name": "add_entry",
                 "as": "712fc194",
@@ -5134,6 +5179,12 @@
     {
       "keyword": "application",
       "provider": "lookup_table",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
       "skip_validation": false,
       "account_id": null
     }

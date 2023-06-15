@@ -185,8 +185,8 @@
                     },
                     "input": {
                       "flow_id": {
-                        "zip_name": "Slack/Recipes/build_project_and_get_status_of_build.recipe.json",
-                        "name": "Build Project and Get Status of Build",
+                        "zip_name": "Slack/Recipes/cicds_rf_build_project_and_get_status_of_build.recipe.json",
+                        "name": "CICDS | RF | Build Project and Get Status of Build",
                         "folder": "Slack/Recipes"
                       }
                     },
@@ -335,8 +335,8 @@
                         },
                         "input": {
                           "flow_id": {
-                            "zip_name": "Slack/Recipes/build_project_and_get_status_of_build.recipe.json",
-                            "name": "Build Project and Get Status of Build",
+                            "zip_name": "Slack/Recipes/cicds_rf_build_project_and_get_status_of_build.recipe.json",
+                            "name": "CICDS | RF | Build Project and Get Status of Build",
                             "folder": "Slack/Recipes"
                           }
                         },
