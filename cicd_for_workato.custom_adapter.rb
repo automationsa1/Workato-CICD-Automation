@@ -151,6 +151,9 @@
           res_success = projects ? (response["state"] == "success") : (response["status"] == "completed")
 
           # If job is in_progress, reinvoke after wait time
+          current_step = current_step + 1
+          max_steps = 10
+          step_time = current_step * 10
           if res_in_progress == true
             reinvoke_after(
               seconds: step_time, 
