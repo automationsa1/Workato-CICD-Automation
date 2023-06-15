@@ -1,7 +1,7 @@
 {
   "name": "CICDS | BOT | Configure project",
   "description": "When there is a trigger event, do action",
-  "version": 5,
+  "version": 6,
   "private": true,
   "concurrency": 1,
   "code": {
@@ -1374,148 +1374,6 @@
               },
               {
                 "number": 17,
-                "provider": "workato_recipe_function",
-                "name": "call_recipe",
-                "as": "6f04309e",
-                "title": null,
-                "description": "Call <span class=\"provider\">CICD | RF | Create folders list</span>",
-                "keyword": "action",
-                "dynamicPickListSelection": {
-                  "flow_id": "CICD | RF | Create target folders list"
-                },
-                "toggleCfg": {
-                },
-                "input": {
-                  "flow_id": "17498152",
-                  "parameters": {
-                    "environment": "test"
-                  }
-                },
-                "extended_output_schema": [
-                  {
-                    "label": "Result",
-                    "name": "result",
-                    "properties": [
-                      {
-                        "name": "folders_list",
-                        "type": "array",
-                        "of": "object",
-                        "label": "Folders list",
-                        "optional": false,
-                        "properties": [
-                          {
-                            "control_type": "text",
-                            "label": "Folder name",
-                            "name": "folder_name",
-                            "type": "string",
-                            "optional": false
-                          },
-                          {
-                            "control_type": "text",
-                            "label": "Folder ID",
-                            "name": "folder_id",
-                            "type": "string",
-                            "optional": false
-                          }
-                        ]
-                      }
-                    ],
-                    "type": "object"
-                  }
-                ],
-                "extended_input_schema": [
-                  {
-                    "label": "Parameters",
-                    "name": "parameters",
-                    "properties": [
-                      {
-                        "control_type": "text",
-                        "label": "Environment",
-                        "name": "environment",
-                        "type": "string",
-                        "optional": false
-                      }
-                    ],
-                    "type": "object"
-                  }
-                ],
-                "comment": "Create list of all Test environment top-level target folders.",
-                "uuid": "4e5fe127-c245-43c0-8dc9-0b13fbac3255",
-                "skip": true
-              },
-              {
-                "number": 18,
-                "provider": "workato_recipe_function",
-                "name": "call_recipe",
-                "as": "35bb3b57",
-                "title": null,
-                "description": "Call <span class=\"provider\">CICD | RF | Create folders list</span>",
-                "keyword": "action",
-                "dynamicPickListSelection": {
-                  "flow_id": "CICD | RF | Create target folders list"
-                },
-                "toggleCfg": {
-                },
-                "input": {
-                  "flow_id": "17498152",
-                  "parameters": {
-                    "environment": "prod"
-                  }
-                },
-                "extended_output_schema": [
-                  {
-                    "label": "Result",
-                    "name": "result",
-                    "properties": [
-                      {
-                        "name": "folders_list",
-                        "type": "array",
-                        "of": "object",
-                        "label": "Folders list",
-                        "optional": false,
-                        "properties": [
-                          {
-                            "control_type": "text",
-                            "label": "Folder name",
-                            "name": "folder_name",
-                            "type": "string",
-                            "optional": false
-                          },
-                          {
-                            "control_type": "text",
-                            "label": "Folder ID",
-                            "name": "folder_id",
-                            "type": "string",
-                            "optional": false
-                          }
-                        ]
-                      }
-                    ],
-                    "type": "object"
-                  }
-                ],
-                "extended_input_schema": [
-                  {
-                    "label": "Parameters",
-                    "name": "parameters",
-                    "properties": [
-                      {
-                        "control_type": "text",
-                        "label": "Environment",
-                        "name": "environment",
-                        "type": "string",
-                        "optional": false
-                      }
-                    ],
-                    "type": "object"
-                  }
-                ],
-                "comment": "Create list of all Prod environment top-level target folders.",
-                "uuid": "1b877b8a-c90b-4407-bc3d-4c4cb3d95d5e",
-                "skip": true
-              },
-              {
-                "number": 19,
                 "provider": "slack_bot",
                 "name": "block_kit_modals",
                 "as": "fd76a53c",
@@ -1603,7 +1461,7 @@
                         "options": {
                           "____source": "#{_('data.cicd_for_workato_connector_1096414_1685367514.fc7fe2e8.folders_list')}",
                           "title": "#{_('data.cicd_for_workato_connector_1096414_1685367514.fc7fe2e8.folders_list.first.name')}",
-                          "value": "#{_('data.cicd_for_workato_connector_1096414_1685367514.fc7fe2e8.folders_list.first.name')}#{_('data.cicd_for_workato_connector_1096414_1685367514.fc7fe2e8.folders_list.first.id')}",
+                          "value": "#{_('data.cicd_for_workato_connector_1096414_1685367514.fc7fe2e8.folders_list.first.name')}_#{_('data.cicd_for_workato_connector_1096414_1685367514.fc7fe2e8.folders_list.first.id')}",
                           "init_value": "false"
                         }
                       }
@@ -1620,7 +1478,7 @@
                 "uuid": "e62b6c06-29b0-4a3d-b044-b8e7b59e0262"
               },
               {
-                "number": 20,
+                "number": 18,
                 "keyword": "stop",
                 "dynamicPickListSelection": {
                 },
@@ -1635,7 +1493,7 @@
             "uuid": "42c5bca3-dd73-49e3-b752-4edb7c79274d"
           },
           {
-            "number": 21,
+            "number": 19,
             "keyword": "if",
             "dynamicPickListSelection": {
             },
@@ -1655,7 +1513,7 @@
             },
             "block": [
               {
-                "number": 22,
+                "number": 20,
                 "provider": "cicd_for_workato_connector_1096414_1685367514",
                 "name": "list_folders",
                 "as": "2d67a4de",
@@ -1675,7 +1533,7 @@
                 "uuid": "1ad6d032-97ae-4691-b72f-7a364c688014"
               },
               {
-                "number": 23,
+                "number": 21,
                 "provider": "workato_recipe_function",
                 "name": "call_recipe",
                 "as": "3f114d28",
@@ -1746,7 +1604,7 @@
                 "skip": true
               },
               {
-                "number": 24,
+                "number": 22,
                 "provider": "slack_bot",
                 "name": "block_kit_modals",
                 "as": "4fbc3591",
@@ -1819,7 +1677,7 @@
                 "uuid": "7b011dd9-4c4b-4292-a0c3-525ee5f9aec5"
               },
               {
-                "number": 25,
+                "number": 23,
                 "keyword": "stop",
                 "dynamicPickListSelection": {
                 },
@@ -1834,7 +1692,7 @@
             "uuid": "d7f5e09f-f5bc-4430-b4dd-1bbbed2cf231"
           },
           {
-            "number": 26,
+            "number": 24,
             "as": "e99c2889",
             "keyword": "catch",
             "dynamicPickListSelection": {
@@ -1847,7 +1705,7 @@
             },
             "block": [
               {
-                "number": 27,
+                "number": 25,
                 "provider": "slack_bot",
                 "name": "post_bot_reply_v2",
                 "as": "726edfff",
